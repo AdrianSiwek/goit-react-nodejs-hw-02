@@ -6,6 +6,7 @@ const {
   validateUpdateContact,
 } = require("../../models/validator");
 
+
 const checkContactId = (contact, contactId, res) => {
   if (!contact) {
     return res
@@ -19,12 +20,14 @@ router.get("/", async (req, res, next) => {
   res.json(contacts);
 });
 
+
 router.get("/:contactId", async (req, res, next) => {
   const { contactId } = req.params;
   const contact = await contactsFunctions.getContactById(contactId);
   checkContactId(contact, contactId, res);
   res.json(contact);
 });
+
 
 router.post("/", async (req, res, next) => {
   try {
@@ -40,6 +43,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+
 router.delete("/:contactId", async (req, res, next) => {
   try {
     const { contactId } = req.params;
@@ -53,6 +57,8 @@ router.delete("/:contactId", async (req, res, next) => {
     return res.status(500).json({ message: "Server error" });
   }
 });
+
+
 
 router.put("/:contactId", async (req, res, next) => {
   try {
@@ -69,5 +75,6 @@ router.put("/:contactId", async (req, res, next) => {
     return res.status(500).json({ message: "Server error" });
   }
 });
+
 
 module.exports = router;
